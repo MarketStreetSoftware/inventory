@@ -51,10 +51,28 @@ task integrationTest(type: Test) {
 }
 
 
+group = 'marketstreet'
+
+//java formater
+//apply plugin: 'com.github.sherter.google-java-format'
+
+task buildDocker333(type: Docker, dependsOn: build) {
+    push = true
+    applicationName = 'inventory'
+    dockerfile = file('src/main/docker/Dockerfile')
+    doFirst {
+        copy {
+            from jar
+            into stageDir
+        }
+    }
+}
+
 task buildDocker(type: Docker) {
   baseImage = 'openjdk:8-jdk-alpine'
   push = project.hasProperty('push')
-  tag = 'magnustiberius/springbootdynamodb'
+  push = false
+  tag = 'magnustiberius/mt'
   addFile {
     from jar
     rename {'app.jar'}
