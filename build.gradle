@@ -72,7 +72,7 @@ task buildDocker(type: Docker) {
   baseImage = 'openjdk:8-jdk-alpine'
   push = project.hasProperty('push')
   push = false
-  tag = 'magnustiberius/mt'
+  tag = 'marketstreet/inventory'
   addFile {
     from jar
     rename {'app.jar'}

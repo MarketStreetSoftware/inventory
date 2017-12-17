@@ -35,7 +35,7 @@ services:
 
   inventory:
     container_name: inventory
-    image: docker.comcast.net/diagnostic/inventory
+    image: marketstreet/inventory
     environment:
       - SPRING_PROFILES_ACTIVE=docker
       - dynamo.baseUrl=http://dynamodb:8000
@@ -50,4 +50,4 @@ services:
 
 networks:
   mtrnet:
-driver: bridge
+    driver: bridge
