@@ -30,7 +30,7 @@ public class DatabaseInitialisation implements ApplicationListener<ContextRefres
 
   @Override
   public void onApplicationEvent(ContextRefreshedEvent event) {
-
+    System.out.println("\n\n\nonApplicationEvent member function.\n\n\n" );
     log.trace("Entering createDatabaseTablesIfNotExist()");
     CreateTableRequest request = dbMapper
         .generateCreateTableRequest(Customer.class)
@@ -39,10 +39,11 @@ public class DatabaseInitialisation implements ApplicationListener<ContextRefres
       DescribeTableResult result = dynamoDB.describeTable(request.getTableName());
       log.info("Table status {}, {}", request.getTableName(), result.getTable().getTableStatus());
     } catch (ResourceNotFoundException expectedException) {
+      System.out.println("\n\n\n createTable member function.\n\n\n" );
       CreateTableResult result = dynamoDB.createTable(request);
       log.info("Table creation triggered {}, {}", request.getTableName(), result.getTableDescription().getTableStatus());
     }
-    
+
     request = dbMapper
             .generateCreateTableRequest(InvItem.class)
             .withProvisionedThroughput(new ProvisionedThroughput(1L, 1L));

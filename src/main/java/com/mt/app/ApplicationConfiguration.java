@@ -12,16 +12,16 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ApplicationConfiguration {
 
-  private final static String DYNAMODB_ENDPOINT_DEFAULT_VALUE = "http://localhost:8000";
+  private final static String DYNAMODB_ENDPOINT_DEFAULT_VALUE = "http://dynamodb:8000";
 
   private final Logger log = LoggerFactory.getLogger(getClass());
 
   @Value("${dynamoDbEndpoint:" + DYNAMODB_ENDPOINT_DEFAULT_VALUE + "}")
   private String dynamoDbEndpoint;
 
-  @Bean
-  public AmazonDynamoDB amazonDynamoDb() {
-
+  //@Bean
+  public AmazonDynamoDB amazonDynamoDb2() {
+    System.out.println("\n\n\namazonDynamoDb2 member function.\n\n\n" );
     log.trace("Entering amazonDynamoDb()");
     AmazonDynamoDB client = new AmazonDynamoDBClient();
     log.info("Using DynamoDb endpoint {}", dynamoDbEndpoint);
@@ -29,8 +29,9 @@ public class ApplicationConfiguration {
     return client;
   }
 
-  @Bean
-  public DynamoDBMapper dynamoDbMapper(AmazonDynamoDB amazonDynamoDB) {
+  //@Bean
+  public DynamoDBMapper dynamoDbMapper2(AmazonDynamoDB amazonDynamoDB) {
+    System.out.println("\n\n\ndynamoDbMapper2 member function.\n\n\n" );
 
     log.trace("Entering dynamoDbMapper()");
     return new DynamoDBMapper(amazonDynamoDB);
